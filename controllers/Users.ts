@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import Route from '../routeMapper/RoutingController';
-import { Get, Post, Trace } from '../routeMapper/methods/index';
+import Route from '../router/RoutingController';
+import { Get, Post, Trace } from '../router/methods/index';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import { jwtGenerator, jwtRefreshExtractor, jwtRefreshGenerator } from '../helpers/jwtHelpers';
 import Auth from '../middlewares/Auth';
