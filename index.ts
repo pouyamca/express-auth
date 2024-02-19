@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import express, { Express, Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
-import ControllerList from './masterControllers'
+import ControllerList from './router/dispatcher'
 import RouteMapper from './router/RouteMapperType';
 import { setupSwagger } from './swagger';
 // +++++ import connectDB from './configsOrInfrastructures/DB'

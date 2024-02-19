@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import controllers from './masterControllers';
+import controllers from './router/dispatcher';
 import path from 'path';
 
 let sm = Object.keys(controllers);
