@@ -1,8 +1,8 @@
 import { model } from 'mongoose';
 import { string } from 'yup';
 import { query } from 'express';
-import { TypeUpdateUser, TypeUser } from '../entities/user/types';
-import { UserSchema } from '../entities/user/schema';
+import { TypeUpdateUser, TypeUser } from '../entities/types/types';
+import { UserSchema } from '../entities/schema/schema';
 
 
 const UserModel = model<TypeUser>('User', UserSchema);

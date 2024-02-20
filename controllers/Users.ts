@@ -4,6 +4,10 @@ import { Get, Post, Trace } from '../router/methods/index';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import { jwtGenerator, jwtRefreshExtractor, jwtRefreshGenerator } from '../helpers/jwtHelpers';
 import Auth from '../middlewares/Auth';
+import BodyValidator from '../middlewares/Validator';
+import { userRegisterForm } from '../validations/users';
+import { createUser } from '../models/User';
+import { UserRegisterDto } from '../entities/DTO/user.dto';
 export const SECRET_KEY: Secret = 'your-secret-key-here';
 
 @Route('/user')
@@ -64,6 +68,7 @@ export default class UserController {
     }
 
     @Post('/:name')
+
     public details(req: Request, res: Response) {
         const token = jwt.sign({ _id: 1, name: 'pouya' }, SECRET_KEY, {
             expiresIn: '2 days',
@@ -73,16 +78,16 @@ export default class UserController {
     }
 
     @Get('/tr')
-    public static detailsTrace(req: Request, res: Response) {
-        console.log(req.trailers)
-        // console.log(req.headers['x-forwarded-for'] || req.socket.remoteAddress)
-        return res.end(
-            //   `${req.method} ${req.hostname} HTTP/${req.headers['x-forwarded-for']}\r\n` +
-            //   `${req.ip} ${req.ips}\r\n`
+    @BodyValidator(userRegisterForm)
 
-            // req.rawHeaders.join('\r\n')
-        )
-        // res.send(`You are looking at the profile of ${req.params.name}`);
+    public async regiter(req: Request, res: Response) {
+        let data = JSON.parse(JSON.stringify(req.body))
+        let result = await createUser(<UserRegisterDto>data)
+        if (result) {
+            return res.status(201).json({ success: true, result })
+        } else {
+            return res.status(200).json({ success: false, result })
+        }
     }
 
 
