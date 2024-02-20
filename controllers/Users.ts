@@ -77,9 +77,17 @@ export default class UserController {
         return res.send(`You are looking at the profile of ${req.params.name}`);
     }
 
+    /**
+    * @swagger
+    * /user:
+    *   get:
+    *     description: registering the user 
+    *     responses:
+    *       201:
+    *         description: creted successfully.
+    */
     @Post('/registering')
     @BodyValidator(userRegisterForm)
-
     public async regiter(req: Request, res: Response) {
         let data = JSON.parse(JSON.stringify(req.body))
         let result = await createUser(<UserRegisterDto>data)
