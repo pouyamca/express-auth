@@ -77,7 +77,7 @@ export default class UserController {
         return res.send(`You are looking at the profile of ${req.params.name}`);
     }
 
-    @Get('/tr')
+    @Post('/registering')
     @BodyValidator(userRegisterForm)
 
     public async regiter(req: Request, res: Response) {
